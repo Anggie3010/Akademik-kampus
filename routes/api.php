@@ -1,17 +1,16 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\StockController;
-use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CourseLectureController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\LecturerController;
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -24,12 +23,14 @@ Route::middleware('auth:sanctum')->group(function () {
     //     Route::delete('/user/{id}', 'destroy');
     // });
 
-    Route::apiResource('user', UserController::class);
-    Route::apiResource('customer', CustomerController::class);
-    Route::apiResource('barang', BarangController::class);
-    Route::apiResource('stock', StockController::class);
-    Route::apiResource('order', OrderController::class);
-   
+    Route::apiResource('student', StudentController::class);
+    Route::apiResource('lecturers', LecturerController::class);
+    
+    Route::apiResource('courses', CourseController::class);
+    Route::apiResource('enrollment', EnrollmentController::class);
+    
+    Route::apiResource('course-lecturers', CourseLectureController::class);
+
 });
 
 
